@@ -1,0 +1,96 @@
+! inlist to evolve a 15 solar mass star
+
+! For the sake of future readers of this file (yourself included),
+! ONLY include the controls you are actually using.  DO NOT include
+! all of the other controls that simply have their default values.
+
+&star_job
+  ! see star/defaults/star_job.defaults
+
+  ! begin with a pre-main sequence model
+  ! create_pre_main_sequence_model = .true.
+    create_initial_model = .true.  
+    mass_in_gm_for_create_initial_model = 1.899d30
+    radius_in_cm_for_create_initial_model = 3.575d10
+
+  ! save a model at the end of the run
+    save_model_when_terminate = .true.
+    save_model_filename = 'second_planet.mod'
+
+  ! display on-screen plots
+    pgstar_flag = .true.
+
+/ ! end of star_job namelist
+
+
+&eos
+  ! eos options
+  ! see eos/defaults/eos.defaults
+!    eos_file_prefix = 'mesa' 
+ 
+/ ! end of eos namelist
+
+
+&kap
+  ! kap options
+  ! see kap/defaults/kap.defaults
+  kap_file_prefix = 'gs98'
+  kap_lowT_prefix = 'lowT_Freedman11'
+
+  use_Type2_opacities = .true.
+  Zbase = 0.02
+
+/ ! end of kap namelist
+
+
+&controls
+  ! see star/defaults/controls.defaults
+
+  ! starting specifications
+    !mass_in_gm_for_create_initial_model = 1.899d31
+   ! radius_in_cm_for_create_initial_model = 3.575d10
+    !initial_mass = 0.01 ! in Msun units
+    initial_z = 0.02
+    initial_Y = 0.27
+    mixing_length_alpha = 2
+
+    log_directory = 'LOGS_attempt2_mesa2'
+
+  ! when to stop
+
+    ! stop when the star nears ZAMS (Lnuc/L > 0.99)
+    ! Lnuc_div_L_zams_limit = 0.99d0
+    ! stop_near_zams = .true.
+    max_age = 20d9
+    ! stop when the center mass fraction of h1 drops below this limit
+    !xa_central_lower_limit_species(1) = 'h1'
+    !xa_central_lower_limit(1) = 1d-3
+
+  ! wind
+
+  ! atmosphere
+    atm_option = 'T_tau'
+    atm_T_tau_relation = 'Eddington'
+    atm_T_tau_opacity = 'fixed'
+
+
+  ! rotation
+
+  ! element diffusion
+
+  ! mlt
+
+  ! mixing
+
+  ! timesteps
+
+  ! mesh
+
+  ! solver
+     ! options for energy conservation (see MESA V, Section 3)
+     energy_eqn_option = 'dedt'
+     use_gold_tolerances = .true.
+
+  ! output
+
+/ ! end of controls namelist

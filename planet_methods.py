@@ -35,7 +35,7 @@ plt.rcParams.update({'axes.linewidth' : 1,
                      'ytick.labelsize': 10,
                      'axes.labelsize': 12,
                      'font.family': 'Serif',
-                      'figure.figsize': (6, 4)
+                      'figure.figsize': (8,8)
                     })
 
 
